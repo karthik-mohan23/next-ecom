@@ -7,7 +7,7 @@ export const allProducts = [
     quantity: 14,
     price: 14000,
     assured: true,
-    status: "bestselling",
+    status: "Bestseller",
   },
   {
     id: "2",
@@ -53,6 +53,6 @@ export const allProducts = [
     quantity: 0,
     price: 219000,
     assured: true,
-    status: "new",
+    status: "New",
   },
 ];
