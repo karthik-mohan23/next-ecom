@@ -31,7 +31,7 @@ async function page() {
       {productsData && productsData.length > 0 ? (
         <ProductsList productsData={productsData} />
       ) : (
-        <h2>No products found</h2>
+        <h2>{process.env.NEXT_PUBLIC_BASE_URL}</h2>
       )}
     </section>
   );
