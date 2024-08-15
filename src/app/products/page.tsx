@@ -1,5 +1,7 @@
+"use client";
 import ProductsList from "@/components/productsList";
 import { ProductsArray } from "@/lib/types";
+import { useEffect, useState } from "react";
 
 const fetchProducts = async () => {
   try {
@@ -19,10 +21,20 @@ const fetchProducts = async () => {
   }
 };
 
-async function page() {
-  const productsData: ProductsArray | null = await fetchProducts();
-  console.log(process.env.NEXT_PUBLIC_BASE_URL);
+function page() {
+  // const productsData: ProductsArray | null = await fetchProducts();
+  const [productsData, setProductsData] = useState<ProductsArray | null>(null);
+
+  useEffect(() => {
+    const getProducts = async () => {
+      const data = await fetchProducts();
+      setProductsData(data);
+    };
+    getProducts();
+  }, []);
+
   console.log(productsData);
+
   return (
     <section>
       <h1 className=" text-2xl md:text-4xl font-semibold text-center pt-10">
@@ -31,7 +43,7 @@ async function page() {
       {productsData && productsData.length > 0 ? (
         <ProductsList productsData={productsData} />
       ) : (
-        <h2>{process.env.NEXT_PUBLIC_BASE_URL}</h2>
+        <h2>No products found</h2>
       )}
     </section>
   );
