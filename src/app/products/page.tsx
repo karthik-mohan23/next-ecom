@@ -4,7 +4,10 @@ import { ProductsArray } from "@/lib/types";
 const fetchProducts = async () => {
   try {
     const response = await fetch(
-      `${process.env.NEXT_PUBLIC_BASE_URL}/api/products`
+      `${process.env.NEXT_PUBLIC_BASE_URL}/api/products`,
+      {
+        cache: "no-store",
+      }
     );
     if (!response.ok) {
       throw new Error("Error fetching products data");
@@ -18,14 +21,15 @@ const fetchProducts = async () => {
 
 async function page() {
   const productsData: ProductsArray | null = await fetchProducts();
-  console.log(productsData);
   return (
     <section>
       <h1 className=" text-2xl md:text-4xl font-semibold text-center pt-10">
         All Products
       </h1>
-      {productsData && productsData.length > 0 && (
+      {productsData && productsData.length > 0 ? (
         <ProductsList productsData={productsData} />
+      ) : (
+        <h2>No products found</h2>
       )}
     </section>
   );

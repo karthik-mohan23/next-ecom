@@ -24,7 +24,7 @@ const productSchema = new mongoose.Schema({
   },
   status: {
     type: String,
-    enum: ["bestselling", "recommended", "new", "featured"],
+    enum: ["Bestseller", "Recommended", "New", "Featured"],
   },
 });
 
