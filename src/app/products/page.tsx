@@ -30,7 +30,7 @@ async function ProductsPage() {
       {productsData && productsData.length > 0 ? (
         <ProductsList productsData={productsData} />
       ) : (
-        <h2>{`${process.env.NEXT_PUBLIC_BASE_URL}/api/products`}</h2>
+        <h2>{`${process.env.NEXT_PUBLIC_BASE_URL}/api/products`} </h2>
       )}
     </section>
   );
