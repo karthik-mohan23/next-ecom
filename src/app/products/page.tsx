@@ -18,7 +18,7 @@ const fetchProducts = async () => {
   }
 };
 
-function page() {
+function ProductsPage() {
   // const productsData: ProductsArray | null = await fetchProducts();
   const [productsData, setProductsData] = useState<ProductsArray | null>(null);
 
@@ -45,4 +45,4 @@ function page() {
     </section>
   );
 }
-export default page;
+export default ProductsPage;
