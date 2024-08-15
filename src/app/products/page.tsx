@@ -6,10 +6,7 @@ import { useEffect, useState } from "react";
 const fetchProducts = async () => {
   try {
     const response = await fetch(
-      `${process.env.NEXT_PUBLIC_BASE_URL}/api/products`,
-      {
-        cache: "no-store",
-      }
+      `${process.env.NEXT_PUBLIC_BASE_URL}/api/products`
     );
     if (!response.ok) {
       throw new Error("Error fetching products data");
