@@ -1,11 +1,11 @@
-"use client";
 import ProductsList from "@/components/productsList";
 import { ProductsArray } from "@/lib/types";
-import { useEffect, useState } from "react";
 
 const fetchProducts = async () => {
   try {
-    const response = await fetch(`/api/products`);
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_BASE_URL}/api/products`
+    );
     if (!response.ok) {
       throw new Error("Error fetching products data");
     }
@@ -16,19 +16,8 @@ const fetchProducts = async () => {
   }
 };
 
-function ProductsPage() {
-  // const productsData: ProductsArray | null = await fetchProducts();
-  const [productsData, setProductsData] = useState<ProductsArray | null>(null);
-
-  useEffect(() => {
-    const getProducts = async () => {
-      const data = await fetchProducts();
-      setProductsData(data);
-    };
-    getProducts();
-  }, []);
-
-  console.log(productsData);
+async function ProductsPage() {
+  const productsData: ProductsArray | null = await fetchProducts();
 
   return (
     <section>
