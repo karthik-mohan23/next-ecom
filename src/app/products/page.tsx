@@ -4,7 +4,10 @@ import { ProductsArray } from "@/lib/types";
 const fetchProducts = async () => {
   try {
     const response = await fetch(
-      `${process.env.NEXT_PUBLIC_BASE_URL}/api/products`
+      `${process.env.NEXT_PUBLIC_BASE_URL}/api/products`,
+      {
+        cache: "no-store",
+      }
     );
     if (!response.ok) {
       throw new Error("Error fetching products data");
