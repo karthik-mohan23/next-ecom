@@ -21,6 +21,8 @@ const fetchProducts = async () => {
 
 async function page() {
   const productsData: ProductsArray | null = await fetchProducts();
+  console.log(process.env.NEXT_PUBLIC_BASE_URL);
+  console.log(productsData);
   return (
     <section>
       <h1 className=" text-2xl md:text-4xl font-semibold text-center pt-10">
