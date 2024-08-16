@@ -8,8 +8,8 @@ type ProductCardProps = {
 
 function ProductCard({ productItem }: ProductCardProps) {
   return (
-    <div className="flex flex-col rounded overflow-hidden shadow-[0_8px_30px_rgb(0,0,0,0.12)]  transition duration-200 h-full active:scale-[1.02]  ">
-      <div className="relative w-full h-48">
+    <div className="flex flex-col rounded overflow-hidden shadow-[0_8px_30px_rgb(0,0,0,0.12)]  transition duration-200 h-full active:scale-[1.02] p-3">
+      <div className="relative w-full h-48  border border-gray-200 rounded-lg">
         <Image
           src={productItem.image}
           alt={`image of ${productItem.title}`}
@@ -33,18 +33,18 @@ function ProductCard({ productItem }: ProductCardProps) {
             </p>
           ) : null}
           <p className=" bg-gray-200 inline-block rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 italic">
-            {productItem.quantity > 0 ? "in stock" : "out of stock"}
+            {productItem.inStock ? "in stock" : "out of stock"}
           </p>
         </div>
 
-        <p className=" px-3 py-1 text-lg font-bold text-gray-700 mr-2 ">
+        <p className=" px-3 pt-1 text-lg font-bold text-gray-700 mr-2 ">
           {formatIndianPrice(productItem.price)}
         </p>
       </div>
       <div className="mt-auto">
         <button
           className="bg-brand-color text-lg font-medium w-full py-2 rounded-md text-white disabled:bg-brand-color/60 disabled:cursor-not-allowed hover:bg-blue-700 hover:cursor-pointer transition duration-200"
-          disabled={productItem.quantity === 0}>
+          disabled={!productItem.inStock}>
           Add to cart
         </button>
       </div>
