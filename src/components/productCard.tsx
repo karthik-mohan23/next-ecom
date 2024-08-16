@@ -29,7 +29,7 @@ function ProductCard({ productItem }: ProductCardProps) {
         <div className="flex items-center gap-2">
           {productItem.assured ? (
             <p className=" bg-brand-color inline-block text-white italic rounded-full px-2 py-1 text-xs font-semibold mr-2 ">
-              Assured{" "}
+              assured{" "}
             </p>
           ) : null}
           <p className=" bg-gray-200 inline-block rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 italic">

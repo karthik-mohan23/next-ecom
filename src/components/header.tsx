@@ -1,3 +1,4 @@
+import { ShoppingCart } from "lucide-react";
 import Link from "next/link";
 
 function Header() {
@@ -27,7 +28,9 @@ function Header() {
               <Link href={`/products`}>Products</Link>
             </li>
             <li>
-              <Link href={`/cart`}>Cart</Link>
+              <Link href={`/cart`} className="flex items-center gap-1">
+                <ShoppingCart size={18} /> <span>Cart</span>
+              </Link>
             </li>
           </ul>
         </nav>
