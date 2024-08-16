@@ -1,6 +1,7 @@
 import { Product } from "@/lib/types";
 import { formatIndianPrice } from "@/lib/utils";
 import Image from "next/image";
+import AddToCartButton from "./addToCartButton";
 
 type ProductCardProps = {
   productItem: Product;
@@ -42,11 +43,7 @@ function ProductCard({ productItem }: ProductCardProps) {
         </p>
       </div>
       <div className="mt-auto">
-        <button
-          className="bg-brand-color text-lg font-medium w-full py-2 rounded-md text-white disabled:bg-brand-color/60 disabled:cursor-not-allowed hover:bg-blue-700 hover:cursor-pointer transition duration-200"
-          disabled={!productItem.inStock}>
-          Add to cart
-        </button>
+        <AddToCartButton productItem={productItem} />
       </div>
     </div>
   );
