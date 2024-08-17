@@ -28,7 +28,7 @@ export const CartDetailsProvider = ({
       if (itemExists) {
         return prevCart.map((item) =>
           item._id === newItem._id
-            ? { ...item, quantity: item?.quantity ? item.quantity++ : 1 }
+            ? { ...item, quantity: (item.quantity || 0) + 1 }
             : item
         );
       } else {
@@ -49,7 +49,7 @@ export const CartDetailsProvider = ({
     setCart((prevCart) =>
       prevCart.map((item) =>
         item._id === itemId
-          ? { ...item, quantity: item.quantity && item.quantity++ }
+          ? { ...item, quantity: (item.quantity || 0) + 1 }
           : item
       )
     );
