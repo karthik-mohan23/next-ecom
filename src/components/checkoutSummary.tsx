@@ -21,7 +21,7 @@ function CheckoutSummary({ finalPrice }: { finalPrice: number }) {
           <input
             type="text"
             placeholder="Enter coupon"
-            className="h-full px-2 border border-blue-300"
+            className="h-full px-2 border w-3/4 border-blue-300"
           />
           <button className="bg-brand-color h-full flex-1  font-semibold  text-white hover:bg-blue-700 duration-300">
             Apply

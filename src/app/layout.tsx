@@ -4,6 +4,7 @@ import "./globals.css";
 import Header from "@/components/header";
 import Footer from "@/components/footer";
 import { CartDetailsProvider } from "@/context/cart";
+import PromotionsHeader from "@/components/promotionsHeader";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -21,6 +22,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <CartDetailsProvider>
+          <PromotionsHeader />
           <Header />
           <main className="min-h-[80vh] w-[90%] max-w-5xl mx-auto">
             {children}
