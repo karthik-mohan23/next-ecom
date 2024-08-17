@@ -7,6 +7,8 @@ type CartContextType = {
   cart: ProductsArray;
   addToCart: (newItem: Product) => void;
   removeFromCart: (itemId: string) => void;
+  increaseItemQuantityInCart: (itemId: string) => void;
+  decreaseItemQuantityInCart: (itemId: string) => void;
 };
 
 const CartContext = createContext<CartContextType | null>(null);
@@ -38,8 +40,39 @@ export const CartDetailsProvider = ({
     setCart((prevCart) => prevCart.filter((item) => item._id !== itemId));
   };
 
+  const increaseItemQuantityInCart = (itemId: string) => {
+    setCart((prevCart) =>
+      prevCart.map((item) =>
+        item._id === itemId
+          ? { ...item, quantity: item.quantity && item.quantity++ }
+          : item
+      )
+    );
+  };
+
+  const decreaseItemQuantityInCart = (itemId: string) => {
+    setCart((prevCart) =>
+      prevCart.map((item) =>
+        item._id === itemId
+          ? {
+              ...item,
+              quantity:
+                item.quantity && item.quantity > 1 ? item.quantity - 1 : 1,
+            }
+          : item
+      )
+    );
+  };
+
   return (
-    <CartContext.Provider value={{ cart, addToCart, removeFromCart }}>
+    <CartContext.Provider
+      value={{
+        cart,
+        addToCart,
+        removeFromCart,
+        increaseItemQuantityInCart,
+        decreaseItemQuantityInCart,
+      }}>
       {children}
     </CartContext.Provider>
   );
