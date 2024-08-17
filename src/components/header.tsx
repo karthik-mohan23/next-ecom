@@ -16,7 +16,7 @@ function Header() {
         <div className="w-full hidden sm:block">
           <input
             type="text"
-            placeholder="search..."
+            placeholder="Search for products, brands and more"
             className="py-2 px-2 w-full"
           />
         </div>
