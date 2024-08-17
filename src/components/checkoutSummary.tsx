@@ -1,5 +1,5 @@
 "use client";
-import { formatIndianPrice } from "@/lib/utils";
+import { discountCode, formatIndianPrice } from "@/lib/utils";
 import Divider from "./divider";
 import Link from "next/link";
 import { useState } from "react";
@@ -9,10 +9,8 @@ function CheckoutSummary({ finalPrice }: { finalPrice: number }) {
   const [isCouponApplied, setIsCouponApplied] = useState(false);
   const [isCouponValid, setIsCouponValid] = useState(false);
 
-  const couponCode = "FREEDOM78";
-
   const handleCoupon = () => {
-    const isValid = couponCode === couponInput;
+    const isValid = discountCode === couponInput;
     setIsCouponValid(isValid);
     setIsCouponApplied(true);
   };

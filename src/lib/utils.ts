@@ -7,3 +7,5 @@ export const formatIndianPrice = (indianRupees: number) => {
 
   return formattedPrice;
 };
+
+export const discountCode = "FREEDOM78";
