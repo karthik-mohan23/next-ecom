@@ -21,6 +21,7 @@ export const CartDetailsProvider = ({
   const [cart, setCart] = useState<ProductsArray>([]);
 
   const addToCart = (newItem: Product) => {
+    console.log("addToCart clicked", newItem);
     setCart((prevCart: ProductsArray) => {
       const itemExists = prevCart.find((item) => item._id === newItem._id);
 
@@ -44,6 +45,7 @@ export const CartDetailsProvider = ({
   };
 
   const increaseItemQuantityInCart = (itemId: string) => {
+    console.log("increaseItemQuantityInCart clicked", itemId);
     setCart((prevCart) =>
       prevCart.map((item) =>
         item._id === itemId
@@ -54,6 +56,7 @@ export const CartDetailsProvider = ({
   };
 
   const decreaseItemQuantityInCart = (itemId: string) => {
+    console.log("decreaseItemQuantityInCart clicked", itemId);
     setCart((prevCart) =>
       prevCart.map((item) =>
         item._id === itemId
