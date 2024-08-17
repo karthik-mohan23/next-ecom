@@ -10,6 +10,7 @@ type CartContextType = {
   removeFromCart: (itemId: string) => void;
   increaseItemQuantityInCart: (itemId: string) => void;
   decreaseItemQuantityInCart: (itemId: string) => void;
+  clearCart: () => void;
 };
 
 const CartContext = createContext<CartContextType | null>(null);
@@ -37,6 +38,10 @@ export const CartDetailsProvider = ({
         return [...prevCart, { ...newItem, quantity: 1 }];
       }
     });
+  };
+
+  const clearCart = () => {
+    setCart([]);
   };
 
   const removeFromCart = (itemId: string) => {
@@ -84,6 +89,7 @@ export const CartDetailsProvider = ({
         removeFromCart,
         increaseItemQuantityInCart,
         decreaseItemQuantityInCart,
+        clearCart,
       }}>
       {children}
     </CartContext.Provider>

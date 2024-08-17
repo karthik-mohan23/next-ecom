@@ -9,6 +9,7 @@ type CartItemListProps = {
   removeFromCart: (itemId: string) => void;
   decreaseItemQuantityInCart: (itemId: string) => void;
   increaseItemQuantityInCart: (itemId: string) => void;
+  clearCart: () => void;
 };
 
 function CartItemList({
@@ -16,6 +17,7 @@ function CartItemList({
   removeFromCart,
   decreaseItemQuantityInCart,
   increaseItemQuantityInCart,
+  clearCart,
 }: CartItemListProps) {
   const totalPrice = cart.reduce((total, item) => {
     const itemTotal = item.price * (item.quantity || 1);
@@ -62,7 +64,7 @@ function CartItemList({
           </div>
         ))}
       </div>
-      <CheckoutSummary finalPrice={totalPrice} />
+      <CheckoutSummary finalPrice={totalPrice} clearCart={clearCart} />
     </section>
   );
 }

@@ -10,6 +10,7 @@ function CartPageContent() {
     removeFromCart,
     decreaseItemQuantityInCart,
     increaseItemQuantityInCart,
+    clearCart,
   } = useCartDetailsContext();
   return (
     <section>
@@ -19,6 +20,7 @@ function CartPageContent() {
           removeFromCart={removeFromCart}
           decreaseItemQuantityInCart={decreaseItemQuantityInCart}
           increaseItemQuantityInCart={increaseItemQuantityInCart}
+          clearCart={clearCart}
         />
       ) : (
         <EmptyCartView />

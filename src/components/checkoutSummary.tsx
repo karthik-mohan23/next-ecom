@@ -4,7 +4,12 @@ import Divider from "./divider";
 import Link from "next/link";
 import { useState } from "react";
 
-function CheckoutSummary({ finalPrice }: { finalPrice: number }) {
+type CheckoutSummaryProps = {
+  finalPrice: number;
+  clearCart: () => void;
+};
+
+function CheckoutSummary({ finalPrice, clearCart }: CheckoutSummaryProps) {
   const [couponInput, setCouponInput] = useState("");
   const [isCouponApplied, setIsCouponApplied] = useState(false);
   const [isCouponValid, setIsCouponValid] = useState(false);
@@ -13,6 +18,13 @@ function CheckoutSummary({ finalPrice }: { finalPrice: number }) {
     const isValid = discountCode === couponInput;
     setIsCouponValid(isValid);
     setIsCouponApplied(true);
+  };
+
+  const handleClearCart = () => {
+    clearCart();
+    setCouponInput("");
+    setIsCouponApplied(false);
+    setIsCouponValid(false);
   };
 
   const discountedPrice = isCouponValid
@@ -33,7 +45,9 @@ function CheckoutSummary({ finalPrice }: { finalPrice: number }) {
         )}
       </div>
       <Link href={`/checkout`} className="inline-block w-full">
-        <button className="bg-brand-color py-2 font-semibold w-full text-white hover:bg-blue-700 duration-300">
+        <button
+          onClick={handleClearCart}
+          className="bg-brand-color py-2 font-semibold w-full text-white hover:bg-blue-700 duration-300">
           Checkout
         </button>
       </Link>
