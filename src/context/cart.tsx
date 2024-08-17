@@ -37,7 +37,10 @@ export const CartDetailsProvider = ({
   };
 
   const removeFromCart = (itemId: string) => {
-    setCart((prevCart) => prevCart.filter((item) => item._id !== itemId));
+    const isConfirmed = confirm("Are you sure you want to delete this item ?");
+    if (isConfirmed) {
+      setCart((prevCart) => prevCart.filter((item) => item._id !== itemId));
+    }
   };
 
   const increaseItemQuantityInCart = (itemId: string) => {
