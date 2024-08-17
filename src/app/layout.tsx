@@ -5,6 +5,7 @@ import Header from "@/components/header";
 import Footer from "@/components/footer";
 import { CartDetailsProvider } from "@/context/cart";
 import PromotionsHeader from "@/components/promotionsHeader";
+import { Toaster } from "sonner";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -29,6 +30,7 @@ export default function RootLayout({
           </main>
           <Footer />
         </CartDetailsProvider>
+        <Toaster richColors />
       </body>
     </html>
   );

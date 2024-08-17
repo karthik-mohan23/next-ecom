@@ -2,6 +2,7 @@
 import { Product, ProductsArray } from "@/lib/types";
 import { useContext, useState } from "react";
 import { createContext } from "react";
+import { toast } from "sonner";
 
 type CartContextType = {
   cart: ProductsArray;
@@ -21,17 +22,18 @@ export const CartDetailsProvider = ({
   const [cart, setCart] = useState<ProductsArray>([]);
 
   const addToCart = (newItem: Product) => {
-    console.log("addToCart clicked", newItem);
     setCart((prevCart: ProductsArray) => {
       const itemExists = prevCart.find((item) => item._id === newItem._id);
 
       if (itemExists) {
+        toast.info(`${newItem.title} quantity updated in cart!`);
         return prevCart.map((item) =>
           item._id === newItem._id
             ? { ...item, quantity: (item.quantity || 0) + 1 }
             : item
         );
       } else {
+        toast.success(`${newItem.title} added to cart!`);
         return [...prevCart, { ...newItem, quantity: 1 }];
       }
     });
@@ -40,12 +42,17 @@ export const CartDetailsProvider = ({
   const removeFromCart = (itemId: string) => {
     const isConfirmed = confirm("Are you sure you want to delete this item ?");
     if (isConfirmed) {
-      setCart((prevCart) => prevCart.filter((item) => item._id !== itemId));
+      setCart((prevCart) => {
+        const item = prevCart.find((item) => item._id === itemId);
+        if (item) {
+          toast.success(`${item.title} removed from cart!`);
+        }
+        return prevCart.filter((item) => item._id !== itemId);
+      });
     }
   };
 
   const increaseItemQuantityInCart = (itemId: string) => {
-    console.log("increaseItemQuantityInCart clicked", itemId);
     setCart((prevCart) =>
       prevCart.map((item) =>
         item._id === itemId
@@ -56,7 +63,6 @@ export const CartDetailsProvider = ({
   };
 
   const decreaseItemQuantityInCart = (itemId: string) => {
-    console.log("decreaseItemQuantityInCart clicked", itemId);
     setCart((prevCart) =>
       prevCart.map((item) =>
         item._id === itemId
