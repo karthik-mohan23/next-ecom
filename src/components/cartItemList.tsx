@@ -2,6 +2,7 @@ import { ProductsArray } from "@/lib/types";
 import Image from "next/image";
 import CheckoutSummary from "./checkoutSummary";
 import Divider from "./divider";
+import RemoveItemFromCartButton from "./removeItemFromCartButton";
 
 type CartItemListProps = {
   cart: ProductsArray;
@@ -39,11 +40,7 @@ function CartItemList({ cart }: CartItemListProps) {
                   <button>+</button>
                 </div>
               </div>
-              <div className="">
-                <button className="text-red-400 hover:text-red-500 duration-300 text-sm font-semibold">
-                  Remove
-                </button>
-              </div>
+              <RemoveItemFromCartButton itemId={item._id} />
             </div>
           </div>
         ))}

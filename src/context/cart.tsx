@@ -6,6 +6,7 @@ import { createContext } from "react";
 type CartContextType = {
   cart: ProductsArray;
   addToCart: (newItem: Product) => void;
+  removeFromCart: (itemId: string) => void;
 };
 
 const CartContext = createContext<CartContextType | null>(null);
@@ -33,8 +34,12 @@ export const CartDetailsProvider = ({
     });
   };
 
+  const removeFromCart = (itemId: string) => {
+    setCart((prevCart) => prevCart.filter((item) => item._id !== itemId));
+  };
+
   return (
-    <CartContext.Provider value={{ cart, addToCart }}>
+    <CartContext.Provider value={{ cart, addToCart, removeFromCart }}>
       {children}
     </CartContext.Provider>
   );
