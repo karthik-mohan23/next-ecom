@@ -10,3 +10,18 @@ export type Product = {
 };
 
 export type ProductsArray = Product[];
+
+export type TUserDetails = {
+  id: string;
+  username: string;
+  email: string;
+};
+
+export type TLoginForm = {
+  email: string;
+  password: string;
+};
+
+export type TSignUpForm = TLoginForm & {
+  username: string;
+};

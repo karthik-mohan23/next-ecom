@@ -6,6 +6,7 @@ import Footer from "@/components/footer";
 import { CartDetailsProvider } from "@/context/cart";
 import PromotionsHeader from "@/components/promotionsHeader";
 import { Toaster } from "sonner";
+import { AuthProvider } from "@/context/auth";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -22,14 +23,16 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <CartDetailsProvider>
-          <PromotionsHeader />
-          <Header />
-          <main className="min-h-[80vh] w-[90%] max-w-5xl mx-auto">
-            {children}
-          </main>
-          <Footer />
-        </CartDetailsProvider>
+        <AuthProvider>
+          <CartDetailsProvider>
+            <PromotionsHeader />
+            <Header />
+            <main className="min-h-[80vh] w-[90%] max-w-5xl mx-auto">
+              {children}
+            </main>
+            <Footer />
+          </CartDetailsProvider>
+        </AuthProvider>
         <Toaster richColors />
       </body>
     </html>

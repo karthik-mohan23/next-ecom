@@ -1,11 +1,14 @@
 "use client";
 
+import { useAuth } from "@/context/auth";
 import { useCartDetailsContext } from "@/context/cart";
 import { ShoppingCart } from "lucide-react";
 import Link from "next/link";
 
 function Header() {
   const { totalCartLength } = useCartDetailsContext();
+  const { userDetails } = useAuth();
+
   return (
     <header className=" bg-brand-color h-16 w-full shadow-[0px_2px_3px_-1px_rgba(0,0,0,0.1),0px_1px_0px_0px_rgba(25,28,33,0.02),0px_0px_0px_1px_rgba(25,28,33,0.08)] ">
       <div className="max-w-5xl mx-auto w-[90%] h-full flex justify-between gap-5 md:gap-10 items-center text-white">
@@ -22,11 +25,15 @@ function Header() {
         <nav>
           <ul className="text-base flex items-center gap-5 font-semibold">
             <li>
-              <Link
-                className="bg-white text-brand-color px-2 md:px-10 py-2 "
-                href={`/login`}>
-                Login
-              </Link>
+              {userDetails ? (
+                <Link href={`/profile`}>{userDetails.username}</Link>
+              ) : (
+                <Link
+                  className="bg-white text-brand-color px-2 md:px-10 py-2 "
+                  href={`/login`}>
+                  Login
+                </Link>
+              )}
             </li>
             <li>
               <Link href={`/products`}>Products</Link>

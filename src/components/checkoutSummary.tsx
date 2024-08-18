@@ -1,8 +1,9 @@
 "use client";
 import { discountCode, formatIndianPrice } from "@/lib/utils";
 import Divider from "./divider";
-import Link from "next/link";
 import { useState } from "react";
+import { useAuth } from "@/context/auth";
+import { useRouter } from "next/navigation";
 
 type CheckoutSummaryProps = {
   finalPrice: number;
@@ -13,6 +14,18 @@ function CheckoutSummary({ finalPrice, clearCart }: CheckoutSummaryProps) {
   const [couponInput, setCouponInput] = useState("");
   const [isCouponApplied, setIsCouponApplied] = useState(false);
   const [isCouponValid, setIsCouponValid] = useState(false);
+
+  const { userDetails } = useAuth();
+  const router = useRouter();
+
+  const handleCheckout = () => {
+    if (!userDetails?.username) {
+      router.push("/login");
+    } else {
+      handleClearCart();
+      router.push("/checkout");
+    }
+  };
 
   const handleCoupon = () => {
     const isValid = discountCode === couponInput;
@@ -44,13 +57,13 @@ function CheckoutSummary({ finalPrice, clearCart }: CheckoutSummaryProps) {
           </span>
         )}
       </div>
-      <Link href={`/checkout`} className="inline-block w-full">
-        <button
-          onClick={handleClearCart}
-          className="bg-brand-color py-2 font-semibold w-full text-white hover:bg-blue-700 duration-300">
-          Checkout
-        </button>
-      </Link>
+
+      <button
+        onClick={handleCheckout}
+        className="bg-brand-color inline-block py-2 font-semibold w-full text-white hover:bg-blue-700 duration-300">
+        Checkout
+      </button>
+
       <div className="pt-2">
         <Divider />
       </div>
