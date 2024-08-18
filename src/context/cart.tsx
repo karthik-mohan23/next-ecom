@@ -1,6 +1,6 @@
 "use client";
 import { Product, ProductsArray } from "@/lib/types";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { createContext } from "react";
 import { toast } from "sonner";
 
@@ -11,6 +11,7 @@ type CartContextType = {
   increaseItemQuantityInCart: (itemId: string) => void;
   decreaseItemQuantityInCart: (itemId: string) => void;
   clearCart: () => void;
+  totalCartLength: number;
 };
 
 const CartContext = createContext<CartContextType | null>(null);
@@ -20,7 +21,14 @@ export const CartDetailsProvider = ({
 }: {
   children: React.ReactNode;
 }) => {
-  const [cart, setCart] = useState<ProductsArray>([]);
+  const [cart, setCart] = useState<ProductsArray>(() => {
+    const storedValue = localStorage.getItem("cartItems");
+    return storedValue ? JSON.parse(storedValue) : [];
+  });
+
+  useEffect(() => {
+    localStorage.setItem("cartItems", JSON.stringify(cart));
+  }, [cart]);
 
   const addToCart = (newItem: Product) => {
     setCart((prevCart: ProductsArray) => {
@@ -81,6 +89,11 @@ export const CartDetailsProvider = ({
     );
   };
 
+  const totalCartLength = cart.reduce(
+    (total, product) => total + (product.quantity ?? 0),
+    0
+  );
+
   return (
     <CartContext.Provider
       value={{
@@ -90,6 +103,7 @@ export const CartDetailsProvider = ({
         increaseItemQuantityInCart,
         decreaseItemQuantityInCart,
         clearCart,
+        totalCartLength,
       }}>
       {children}
     </CartContext.Provider>

@@ -3,8 +3,8 @@
 import { useCartDetailsContext } from "@/context/cart";
 
 function CartItemCount() {
-  const { cart } = useCartDetailsContext();
-  const itemsInCart = cart.length;
-  return <p className="font-medium">{itemsInCart} Items in Cart</p>;
+  const { totalCartLength } = useCartDetailsContext();
+
+  return <p className="font-medium">{totalCartLength} Items in Cart</p>;
 }
 export default CartItemCount;
