@@ -29,18 +29,21 @@ function Header() {
                 <Link href={`/profile`}>{userDetails.username}</Link>
               ) : (
                 <Link
-                  className="bg-white text-brand-color px-2 md:px-10 py-2 "
+                  className="bg-white text-brand-color px-2 md:px-10 py-2 hover:underline transition"
                   href={`/login`}>
                   Login
                 </Link>
               )}
             </li>
             <li>
-              <Link href={`/products`}>Products</Link>
+              <Link href={`/products`} className="hover:underline transition ">
+                Products
+              </Link>
             </li>
             <li className="relative">
               <Link href={`/cart`} className="flex items-center gap-1">
-                <ShoppingCart size={18} /> <span>Cart</span>{" "}
+                <ShoppingCart size={18} />{" "}
+                <span className="hover:underline transition">Cart</span>{" "}
                 {totalCartLength > 0 && (
                   <span className="absolute -top-2 -right-2 bg-[#ffe500] text-brand-color rounded-full h-5 w-5 flex items-center justify-center text-sm">
                     {totalCartLength}

@@ -14,15 +14,13 @@ export function middleware(request: NextRequest) {
 
   const isPublicPath = publicPaths.includes(path);
 
-  // Redirect logic for authenticated users
+  // Redirect authenticated users to home page
   if (token !== "" && isPublicPath) {
-    // Redirect authenticated users from public paths to the home page
     return NextResponse.redirect(new URL("/", request.nextUrl));
   }
 
-  // Redirect logic for unauthenticated users
+  // Redirect unauthenticated users to the login page
   if (token === "" && isProtectedPath) {
-    // Redirect unauthenticated users from protected paths to the login page
     return NextResponse.redirect(new URL("/login", request.nextUrl));
   }
 }

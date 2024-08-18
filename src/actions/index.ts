@@ -7,7 +7,7 @@ import { cookies } from "next/headers";
 import { TLoginForm, TSignUpForm } from "@/lib/types";
 import User from "@/models/User";
 
-const secretKey = "JWT123";
+const secretKey = process.env.JWT_SECRET as string;
 
 export async function signUpAction(formData: TSignUpForm) {
   await connectToDB();
@@ -71,7 +71,6 @@ export async function loginAction(formData: TLoginForm) {
   try {
     const { email, password } = formData;
 
-    //check if user exists in DB
     const checkUser = await User.findOne({ email });
     if (!checkUser) {
       return {
@@ -80,7 +79,6 @@ export async function loginAction(formData: TLoginForm) {
       };
     }
 
-    //check if password is valid or not
     const checkPassword = await bcryptjs.compare(password, checkUser.password);
     if (!checkPassword) {
       return {
@@ -126,6 +124,7 @@ export async function logoutAction() {
 
 export async function fetchUserDetailsAction() {
   await connectToDB();
+
   try {
     const getCookies = cookies();
     const token = getCookies.get("token")?.value || "";
