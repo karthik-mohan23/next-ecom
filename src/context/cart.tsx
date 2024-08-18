@@ -16,18 +16,35 @@ type CartContextType = {
 
 const CartContext = createContext<CartContextType | null>(null);
 
+const initialState: ProductsArray = [];
+
 export const CartDetailsProvider = ({
   children,
 }: {
   children: React.ReactNode;
 }) => {
-  const [cart, setCart] = useState<ProductsArray>(() => {
-    const storedValue = localStorage.getItem("cartItems");
-    return storedValue ? JSON.parse(storedValue) : [];
-  });
+  const [cart, setCart] = useState<ProductsArray>(initialState);
 
   useEffect(() => {
-    localStorage.setItem("cartItems", JSON.stringify(cart));
+    const storedCart = localStorage.getItem("cartItems");
+    if (storedCart) {
+      try {
+        const cartData: ProductsArray = JSON.parse(storedCart);
+        setCart(cartData);
+      } catch (error) {
+        console.error("Error parsing cart items from localStorage:", error);
+      }
+    }
+  }, []);
+
+  useEffect(() => {
+    if (cart !== initialState) {
+      try {
+        localStorage.setItem("cartItems", JSON.stringify(cart));
+      } catch (error) {
+        console.error("Error saving cart items to localStorage:", error);
+      }
+    }
   }, [cart]);
 
   const addToCart = (newItem: Product) => {
