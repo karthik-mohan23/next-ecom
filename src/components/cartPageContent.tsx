@@ -13,7 +13,7 @@ function CartPageContent() {
     clearCart,
   } = useCartDetailsContext();
   return (
-    <section>
+    <section className="min-h-[60vh]">
       {cart.length > 0 ? (
         <CartItemList
           cart={cart}

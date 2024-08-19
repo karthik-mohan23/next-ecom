@@ -2,7 +2,7 @@ import Link from "next/link";
 
 function EmptyCartView() {
   return (
-    <section className="flex flex-col gap-2  min-h-[40vh] items-center justify-center">
+    <section className="flex flex-col gap-2  min-h-[45vh]  items-center justify-center">
       <h3>Your cart is empty.</h3>
       <Link
         href={`/products`}

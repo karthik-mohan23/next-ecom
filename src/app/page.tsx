@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export default async function Home() {
   return (
-    <main className="flex   min-h-[85vh] h-full  w-full flex-col items-center justify-between pt-24 md:pt-32">
+    <main className="flex min-h-[80vh]  w-full flex-col items-center justify-between pt-24 md:pt-32">
       <div className="mx-auto space-y-3">
         <h1 className="bg-gradient-to-r from-indigo-400 to-cyan-400 bg-clip-text text-transparent  relative   pt-5 mx-auto md:px-4 md:py-2 tracking-tighter  text-center font-semibold md:text-7xl lg:text-7xl sm:text-7xl text-5xl">
           Where Luxury Meets Affordability
